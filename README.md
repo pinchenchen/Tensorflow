@@ -53,6 +53,7 @@ with tf.Session() as sess:
         print i,sess.run(W),sess.run(b)                 # 輸出結果
 ```
 ### 3  Tensorboard 視覺化工具
+![](https://github.com/pinchenchen/Tensorflow/blob/master/video14.png)
 - 命名方式
 ```
 ...
