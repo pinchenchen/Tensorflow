@@ -21,9 +21,9 @@
 #### 2.1 Tensorflow基礎架構
 * Computation Graph
 ```
-# placehoder(類型, 形狀, 名子=None), 為 feed 建立佔位符, 與 feed_dict={} 一起使用
-x_ = tf.placehoser( tf.float32, [None,2] )
-y_ = tf.placehoser( tf.float32, [None,1] )
+# placeholder(類型, 形狀, 名子=None), 為 feed 建立佔位符, 與 feed_dict={} 一起使用
+x_ = tf.placeholder( tf.float32, [None,2] )
+y_ = tf.placeholder( tf.float32, [None,1] )
 
 # Variable 創建變量
 w = tf.Variable( tf.random_uniform([2,1],-1.0,1.0) )  # Weight 範圍是 -1.0 ~ 1.0
@@ -60,7 +60,7 @@ with tf.Session() as sess:
 layer_name = 'layer%s'%n_layer                                                  # 每層都命名
    with tf.name_scope(layer_name):                                              # with tf.name_scope
        with tf.name_scope('Weights'):                                             ('可打開的框框名稱')
-           Weights = tf.Variable(tf.random_normal([in_size,out_size]),name='W') # 函數(..., name='節點名稱')
+           Weights = tf.Variable(tf.random_normal([in_size,out_size]),name='W') # 函數(..., name='橢圓節點名稱')
            tf.histogram_summary(layer_name+'/weights', Weights)                 # tf.histogram_summary()
 ...                                                                                            建立直方圖
        
@@ -83,6 +83,66 @@ $ tensorboard --logdir=./logs/
 get http://localhost:6006
 
 ## 神經網路架構
+* 建構神經網路
+```
+# 定義數據資料
+x_data = np.linspace(-1,1,300,dtype=np.float32)[:,np.newaxis]
+noise = np.random.normal(0,0.05,x_data.shape).astype(np.float32)
+y_data = np.square(x_data)-0.5+noise
 
+# placeholder 提供佔位符給輸入資料
+# placeholder(符點數, [n*1]維度, 名子=None) 
+xs = tf.placeholder(tf.float32,[None,1])   #None:不設定
+ys = tf.placeholder(tf.float32,[None,1])
+
+# 建構隱藏神經層 layer
+# 第一層 = add_layer( input, 輸入維度, 輸出維度, 激活函數 )
+layer1 = add_layer(xs, 1, 10, activation_function=tf.nn.relu)
+
+# 定義輸出層
+prediction = add_layer(layer1, 10, 1) # 利用上一层作为输入
+
+# 計算loss損失函數 (對 ys & prediction 之間的差 取平方和，再將第二個維度相加 取平均值)
+loss = tf.reduce_mean( tf.reduce_sum(tf.square(ys-prediction),reduction_indices=[1]) )
+
+# 使用GradientDescent梯度下降法最小化loss
+train = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
+
+# 初始化所有變量
+init = tf.initialize_all_variables()
+
+# 定義 session 
+sess = tf.Session()
+sess.run(init)
+
+# 輸出結果
+for i in range(1000):
+    sess.run(train,feed_dict={xs:x_data,ys:y_data})
+    if i%50==0:
+        print sess.run(loss,feed_dict={xs:x_data,ys:y_data})
+```
+* 輸出結果:
+```
+0.45402
+0.0145364
+0.00721318
+0.0064215
+0.00614493
+0.00599307
+0.00587578
+0.00577039
+0.00567172
+0.00558008
+0.00549546
+0.00541595
+0.00534059
+0.00526139
+0.00518873
+0.00511403
+0.00504063
+0.0049613
+0.0048874
+0.004819
+```
 ## MNIST 
 ## 常用函式庫
