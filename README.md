@@ -136,19 +136,19 @@ with tf.name_scope('train'):
     train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
 
 # 定義 session 
-sess = tf.Session()
+with tf.Session() as sess:
 
-# Summary 寫入文件中儲存
-if int((tf.__version__).split('.')[1]) < 12 and int((tf.__version__).split('.')[0]) < 1:
-    writer = tf.train.SummaryWriter('logs/', sess.graph)
-else: # tensorflow version >= 0.12
-    writer = tf.summary.FileWriter("logs/", sess.graph)  
+    # Summary 寫入文件中儲存
+    writer = tf.train.SummaryWriter('logs/', sess.graph) 
 
-# 初始化所有變量
-sess.run(tf.initialize_all_variables())
+    # 初始化所有變量
+    sess.run(tf.initialize_all_variables())
 
-# 執行 session (feed_dict 搭配 placehoder 匯入input_data)
-sess.run(train_step,feed_dict={xs:batch_xs,ys:batch_ys})
+    # 執行 session (feed_dict 搭配 placehoder 匯入input_data)
+    for i in range(1000):
+        sess.run(train_step,feed_dict={xs:x_data,ys:y_data})
+        if i%100==0:
+            print(sess.run(loss,feed_dict={xs:x_data,ys:y_data}))
 
 # 更新 Summary
 writer = tf.summary.FileWriter("logs/", sess.graph)
