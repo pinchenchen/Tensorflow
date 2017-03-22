@@ -39,8 +39,11 @@ loss =  tf.reduce_mean(tf.square(y-y_data))
 optimizer = tf.train.GradientDescentOptimizer(0.5)    # 使用GradientDescent方法，學習速率是0.5
 train = optimizer.minimize(loss)                      # 使用梯度下降法優化loss以找到最小值
 
-# initalizer 初始化
-init = tf.initialize_all_variables()                  # 初始化所有變量
+# initalizer 初始化所有變量( 不同的 tensorflow 版本有差( 0.12版前後 )
+if int((tf.__version__).split('.')[1]) < 12 and int((tf.__version__).split('.')[0]) < 1:
+    init = tf.initialize_all_variables()
+else:
+    init = tf.global_variables_initializer()
 ```
 * Session
 ```
@@ -50,7 +53,7 @@ with tf.Session() as sess:
   for i in xrange(500):
     sess.run(train,feed_dict={ x_:x_data, y_:y_data })  # feed_dict 搭配 placehoder 匯入input_data
     if i%50 == 0:                                       # 每50次輸出一次結果
-        print i,sess.run(W),sess.run(b)                 # 輸出結果
+        print i,sess.run(w),sess.run(b)                 # 輸出結果
 ```
 ### 3  Tensorboard 視覺化工具
 ![](https://github.com/pinchenchen/Tensorflow/blob/master/video14.png)
@@ -66,8 +69,11 @@ layer_name = 'layer%s'%n_layer                                                  
        
 merged = tf.merge_all_summaries()                                               # merge所有的summary
 ...
-
-writer = tf.train.SummaryWriter("logs/", sess.graph)                            #寫入文件中儲存
+# 寫入文件中儲存 ( 不同的 tensorflow 版本有差( 0.12版前後 )
+if int((tf.__version__).split('.')[1]) < 12 and int((tf.__version__).split('.')[0]) < 1:
+    writer = tf.train.SummaryWriter('logs/', sess.graph)
+else: # tensorflow version >= 0.12
+    writer = tf.summary.FileWriter("logs/", sess.graph)                           
 ...
 
 for i in range(500):
@@ -85,64 +91,80 @@ get http://localhost:6006
 ## 神經網路架構
 * 建構神經網路
 ```
+from __future__ import print_function
+import tensorflow as tf
+
 # 定義數據資料
-x_data = np.linspace(-1,1,300,dtype=np.float32)[:,np.newaxis]
-noise = np.random.normal(0,0.05,x_data.shape).astype(np.float32)
+x_data = np.linspace(-1,1,300,dtype=np.float32)[:,np.newaxis]     # [:,np.newaxis]
+noise = np.random.normal(0,0.05,x_data.shape).astype(np.float32)  # 製造一些noise看起來較像真實數據
 y_data = np.square(x_data)-0.5+noise
 
 # placeholder 提供佔位符給輸入資料
-# placeholder(符點數, [n*1]維度, 名子=None) 
-xs = tf.placeholder(tf.float32,[None,1])   #None:不設定
-ys = tf.placeholder(tf.float32,[None,1])
+# placeholder(符點數, [n*1]維度, 名子)                    
+with tf.name_scope('inputs'):                                     # inputs框框命名為'inputs'
+    xs = tf.placeholder(tf.float32, [None, 1], name='x_input')    # None:不設定
+    ys = tf.placeholder(tf.float32, [None, 1], name='y_input')    # ys input節點命名為'y_input'
+    
+# 建構隱藏神經層 layer 與創建變量 Variable 
+# add_layer( input, 輸入維度, 輸出維度, 激活函數 )
+def add_layer(inputs, in_size, out_size, activation_function=None):
+  layer_name = 'layer%s'%n_layer
+  with tf.name_scope(layer_name):                                                  # 這層命名為'layer'
+     with tf.name_scope('weights'):
+        Weights = tf.Variable(tf.random_normal([in_size, out_size]), name='W')  # weight變量節點命名為'W'
+        tf.histogram_summary(layer_name+'/weights', Weights)                       # tf.histogram_summary()建立直方圖
+     with tf.name_scope('biases'):                                              # biase框框命名為'biases'
+        biases = tf.Variable(tf.zeros([1, out_size]) + 0.1, name='b')           # biase起始值為0.1,大小為[1*out_size]
+        tf.histogram_summary(layer_name+'/biases', biases)                       
+     with tf.name_scope('Wx_plus_b'):                                           # 輸出的框框命名為'Wx_plus_b'
+        Wx_plus_b = tf.add(tf.matmul(inputs, Weights), biases)
+     
+     if activation_function is None:
+        outputs = Wx_plus_b
+     else:
+        outputs = activation_function(Wx_plus_b, )
+        tf.histogram_summary(layer_name+'/outputs',outputs)                     # tf.histogram_summary()建立直方圖
+     return outputs
 
-# 建構隱藏神經層 layer
-# 第一層 = add_layer( input, 輸入維度, 輸出維度, 激活函數 )
-layer1 = add_layer(xs, 1, 10, activation_function=tf.nn.relu)
+# 建立隱藏層 (input=xs, 輸入維度=1 → 輸出維度=10, 激活函數=relu function)
+l1 = add_layer(xs, 1, 10, activation_function=tf.nn.relu)
 
-# 定義輸出層
-prediction = add_layer(layer1, 10, 1) # 利用上一层作为输入
+# 定義輸出層 (input=l1 隱藏層的輸出, 輸入維度=10 → 輸出維度=1, 激活函數=None)
+prediction = add_layer(l1, 10, 1, activation_function=None)
 
-# 計算loss損失函數 (對 ys & prediction 之間的差 取平方和，再將第二個維度相加 取平均值)
+# 計算 loss 損失函數 (對 ys & prediction 之間的差 取平方和，再將第二個維度相加 取平均值)
 loss = tf.reduce_mean( tf.reduce_sum(tf.square(ys-prediction),reduction_indices=[1]) )
 
-# 使用GradientDescent梯度下降法最小化loss
-train = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
-
-# 初始化所有變量
-init = tf.initialize_all_variables()
+# 使用 GradientDescent 梯度下降法最小化loss
+with tf.name_scope('train'):
+    train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
 
 # 定義 session 
 sess = tf.Session()
+
+# Summary 寫入文件中儲存
+if int((tf.__version__).split('.')[1]) < 12 and int((tf.__version__).split('.')[0]) < 1:
+    writer = tf.train.SummaryWriter('logs/', sess.graph)
+else: # tensorflow version >= 0.12
+    writer = tf.summary.FileWriter("logs/", sess.graph)  
+
+# 初始化所有變量
+if int((tf.__version__).split('.')[1]) < 12 and int((tf.__version__).split('.')[0]) < 1:
+    init = tf.initialize_all_variables()
+else:
+    init = tf.global_variables_initializer()
+
+# 執行 session
 sess.run(init)
 
-# 輸出結果
-for i in range(1000):
-    sess.run(train,feed_dict={xs:x_data,ys:y_data})
-    if i%50==0:
-        print sess.run(loss,feed_dict={xs:x_data,ys:y_data})
+# get session
+sess = tf.Session()
+
+# 更新 Summary
+writer = tf.summary.FileWriter("logs/", sess.graph)
 ```
-* 輸出結果:
 ```
-0.45402
-0.0145364
-0.00721318
-0.0064215
-0.00614493
-0.00599307
-0.00587578
-0.00577039
-0.00567172
-0.00558008
-0.00549546
-0.00541595
-0.00534059
-0.00526139
-0.00518873
-0.00511403
-0.00504063
-0.0049613
-0.0048874
-0.004819
+$ tensorboard --logdir='logs/'
 ```
 ## MNIST 
 ## 常用函式庫
