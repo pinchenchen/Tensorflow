@@ -108,24 +108,24 @@ with tf.name_scope('inputs'):                                  
 # 建構隱藏神經層 layer 與創建變量 Variable 
 # add_layer( input, 輸入維度, 輸出維度, 激活函數 )
 def add_layer(inputs, in_size, out_size, activation_function=None):
-  layer_name = 'layer%s'%n_layer
-  with tf.name_scope(layer_name):                                                  # 這層命名為'layer'
+  with tf.name_scope('layer'):                                                  # 這層命名為'layer'
      with tf.name_scope('weights'):
         Weights = tf.Variable(tf.random_normal([in_size, out_size]), name='W')  # weight變量節點命名為'W'
-        tf.histogram_summary(layer_name+'/weights', Weights)                       # tf.histogram_summary()建立直方圖
+        tf.histogram_summary(layer_name+'/weights', Weights)                    # tf.histogram_summary()建立直方圖
      with tf.name_scope('biases'):                                              # biase框框命名為'biases'
         biases = tf.Variable(tf.zeros([1, out_size]) + 0.1, name='b')           # biase起始值為0.1,大小為[1*out_size]
-        tf.histogram_summary(layer_name+'/biases', biases)                       
+        tf.histogram_summary(layer_name+'/biases', biases)                       
      with tf.name_scope('Wx_plus_b'):                                           # 輸出的框框命名為'Wx_plus_b'
         Wx_plus_b = tf.add(tf.matmul(inputs, Weights), biases)
      
-     if activation_function is None:
-        outputs = Wx_plus_b
+     if activation_function is None:                                            # 無激活函數則 outputs = Wx_plus_b
+        outputs = Wx_plus_b
      else:
-        outputs = activation_function(Wx_plus_b, )
-        tf.histogram_summary(layer_name+'/outputs',outputs)                     # tf.histogram_summary()建立直方圖
+        outputs = activation_function(Wx_plus_b, ) 
+        
+     tf.histogram_summary(layer_name+'/outputs',outputs)                        # tf.histogram_summary()建立直方圖
      return outputs
-
+     
 # 建立隱藏層 (input=xs, 輸入維度=1 → 輸出維度=10, 激活函數=relu function)
 l1 = add_layer(xs, 1, 10, activation_function=tf.nn.relu)
 
