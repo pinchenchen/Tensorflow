@@ -4,11 +4,11 @@
 * 繪製計算數據流程圖
 ### 1 神經網路
 * 由輸入層+隱藏層+輸出層組成
-* 隱藏層輸出的output = input*weight + baise
+* 隱藏層輸出的output = input\*weight + baise
 * 輸出層 Y' 經由 activation function 激活
 ![](https://github.com/pinchenchen/Tensorflow/blob/master/NN.png)
 * 計算 Y' 與真實數據 Y 的差距(損失函數)
-* 訓練目標：訓練 Weight 與 Baise 使得 Y' 與 Y 的差距最小 
+* 訓練目標：訓練 Weight 與 Baise 使得 Y' 與 Y 的差距最小(↓不同方法的訓練過程)
 ![](https://github.com/pinchenchen/Tensorflow/blob/master/speedup3.png)
 
 ### 2 基本概念
