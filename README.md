@@ -93,11 +93,7 @@ get http://localhost:6006
 ```
 from __future__ import print_function
 import tensorflow as tf
-
-# 定義數據資料
-x_data = np.linspace(-1,1,300,dtype=np.float32)[:,np.newaxis]     # [:,np.newaxis]
-noise = np.random.normal(0,0.05,x_data.shape).astype(np.float32)  # 製造一些noise看起來較像真實數據
-y_data = np.square(x_data)-0.5+noise
+import numpy as np
 
 # placeholder 提供佔位符給輸入資料
 # placeholder(符點數, [n*1]維度, 名子)                    
