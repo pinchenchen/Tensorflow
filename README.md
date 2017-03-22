@@ -2,6 +2,29 @@
 * 官網：[Tensorflow](https://www.tensorflow.org/)
 * 開源機器學習工具，神經網路的Python外部結構包
 * 繪製計算數據流程圖
+### 0 安裝
+* Tensorflow1.0.1 CPU
+* Linux with Anaconda and jupyter notebook
+* ( pip uninstall tensorflow)(pip uninstall protobuf)
+1. download Anaconda
+2. download Tensorflow
+```
+    $ conda create -n tensorflow
+    $ source activate tensorflow
+    $ pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.0.1-cp27-none-linux_x86_64.whl
+```
+3. use jupyter notebook
+```
+$ conda install ipython`
+$ conda install jupyter`
+$ ipython kernelspec install-self --user
+```
+I get `Installed kernelspec python2 in /root/.local/shere/Jupyter/kernels/python2`
+```
+$ mkdir -p ~/.ipython/kernels
+$ mv ~/.local/share/jupyter/kernels/python2 ~/.ipython/kernels/tfkernels
+cd ~/.ipython/kernels/tfkernel/
+```
 ### 1 神經網路
 * 由輸入層+隱藏層+輸出層組成
 * 隱藏層輸出的output = input\*weight + baise
