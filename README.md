@@ -11,7 +11,7 @@
 * 訓練目標：訓練 Weight 與 Baise 使得 Y' 與 Y 的差距最小(↓不同方法的訓練過程)
 ![](https://github.com/pinchenchen/Tensorflow/blob/master/speedup3.png)
 
-### 2 基本概念
+### 2 Tensorflow基本概念
 * 用`graph`描述計算的過程
 * 在 `session` 中執行
 * `tensor`表示數據(組)
@@ -58,11 +58,11 @@ with tf.Session() as sess:
 ```
 ...
 layer_name = 'layer%s'%n_layer                                                  # 每層都命名
-   with tf.name_scope(layer_name):                                              # with tf.name_scope('可打開的框框名稱')
-       with tf.name_scope('Weights'):
+   with tf.name_scope(layer_name):                                              # with tf.name_scope
+       with tf.name_scope('Weights'):                                             ('可打開的框框名稱')
            Weights = tf.Variable(tf.random_normal([in_size,out_size]),name='W') # 函數(..., name='節點名稱')
-           tf.histogram_summary(layer_name+'/weights', Weights)                 # tf.histogram_summary()建立直方圖
-...
+           tf.histogram_summary(layer_name+'/weights', Weights)                 # tf.histogram_summary()
+...                                                                                            建立直方圖
        
 merged = tf.merge_all_summaries()                                               # merge所有的summary
 ...
