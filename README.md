@@ -104,7 +104,7 @@ with tf.name_scope('inputs'):                                  
 # 建構隱藏神經層 layer 與創建變量 Variable 
 # add_layer( input, 輸入維度, 輸出維度, 激活函數 )
 def add_layer(inputs, in_size, out_size, activation_function=None):
-  with tf.name_scope('layer'):                                                  # 這層命名為'layer'
+  with tf.name_scope('layer'):                                                  
      with tf.name_scope('weights'):
         Weights = tf.Variable(tf.random_normal([in_size, out_size]), name='W')  # weight變量節點命名為'W'
         tf.histogram_summary(layer_name+'/weights', Weights)                    # tf.histogram_summary()建立直方圖
@@ -145,16 +145,10 @@ else: # tensorflow version >= 0.12
     writer = tf.summary.FileWriter("logs/", sess.graph)  
 
 # 初始化所有變量
-if int((tf.__version__).split('.')[1]) < 12 and int((tf.__version__).split('.')[0]) < 1:
-    init = tf.initialize_all_variables()
-else:
-    init = tf.global_variables_initializer()
+sess.run(tf.initialize_all_variables())
 
-# 執行 session
-sess.run(init)
-
-# get session
-sess = tf.Session()
+# 執行 session (feed_dict 搭配 placehoder 匯入input_data)
+sess.run(train_step,feed_dict={xs:batch_xs,ys:batch_ys})
 
 # 更新 Summary
 writer = tf.summary.FileWriter("logs/", sess.graph)
