@@ -197,25 +197,25 @@ mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 * Defined Neural Network Function
 ```
 def NeuralNetwork():
-# 圖像大小是 28 x 28 = 784，總共有 10 個 Laybel
-# [None,784]：將每一張圖都轉為 None(任意)*784 的維度
+    # 圖像大小是 28 x 28 = 784，總共有 10 個 Laybel
+    # [None,784]：將每一張圖都轉為 None(任意)*784 的維度
     xs = tf.placeholder(tf.float32,[None,784])
     ys = tf.placeholder(tf.float32,[None,10])
     
-# activation_function=tf.nn.softmax：透過 Softmax 函數將分類器輸出的分數(Evidence)轉換為機率(Probability)
+    # activation_function=tf.nn.softmax：透過 Softmax 函數將分類器輸出的分數(Evidence)轉換為機率(Probability)
     prediction = add_layer(xs, 784, 10, n_layer=1,activation_function=tf.nn.softmax)
     
-# 計算loss
+    # 計算loss
     loss = tf.reduce_mean(-tf.reduce_sum(ys*tf.log(prediction),reduction_indices=[1]))
-# 使用梯度下降法優化Loss，學習速率是0.5
+    # 使用梯度下降法優化Loss，學習速率是0.5
     train_step = tf.train.GradientDescentOptimizer(0.5).minimize(loss)
     
-# Run the Session
+    # Run the Session
     sess = tf.Session()
-# 初始化所有變量
+    # 初始化所有變量
     sess.run(tf.initialize_all_variables())
-# 跑2000次，每200次print準確率
-# batch(100)：每次隨機抓取100筆去做訓練
+    # 跑2000次，每200次print準確率
+    # batch(100)：每次隨機抓取100筆去做訓練
     for i in range(2000):
         batch_xs, batch_ys = mnist.train.next_batch(100)
         sess.run(train_step,feed_dict={xs:batch_xs,ys:batch_ys})
@@ -225,21 +225,26 @@ def NeuralNetwork():
 * Defined Layer
 ```
 def add_layer(inputs,in_size,out_size,n_layer,activation_function=None):
-# 每一層都為他命名
+    # 每一層都為他命名
     layer_name = 'layer%s'%n_layer
     
-# 每層的內容都有Weight, biases, Ws_plus_b
+    # 每層的內容都有 Weight, biases, Ws_plus_b
     with tf.name_scope(layer_name):
         with tf.name_scope('Weights'):      
-# 
-            Weights = tf.Variable(tf.random_normal([in_size,out_size]),name='W')
-            tf.histogram_summary(layer_name+'/weights', Weights)
+            # Weight 是一個[in_size*out_size]形狀的隨機變數
+            Weights = tf.Variable(tf.random_normal([in_size,out_size]),name='W')
+            # 建立直方圖
+            tf.histogram_summary(layer_name+'/weights', Weights)
         with tf.name_scope('biases'):
-            biases = tf.Variable(tf.zeros([1,out_size]) + 0.1,name='b')
+            # biases 形狀為[1*out_size]，內容是0.1
+            biases = tf.Variable(tf.zeros([1,out_size]) + 0.1,name='b')
             tf.histogram_summary(layer_name+'/biases',biases)
         with tf.name_scope('Ws_plus_b'):
-            Ws_plus_b = tf.matmul(inputs,Weights) + biases
-        if activation_function is None:
+            # Ws_plus_b = input值* Weights + biases
+            Ws_plus_b = tf.matmul(inputs,Weights) + biases
+        
+        # 激活函數，預設為None
+        if activation_function is None:
             outputs = Ws_plus_b
         else:
             outputs = activation_function(Ws_plus_b)
@@ -249,11 +254,11 @@ def add_layer(inputs,in_size,out_size,n_layer,activation_function=None):
 * Compute Accuracy
 ```
 def compute_accuracy(xs,ys,v_xs,v_ys,sess,prediction):
-# feed_dict={xs:v_xs}搭配placeholder將資料匯入
+    # feed_dict={xs:v_xs}搭配placeholder將資料匯入
     y_pre = sess.run(prediction,feed_dict={xs:v_xs})
-# tf.argmax()：得到每一筆資料相應的label值，並用 tf.equal() 檢查實際與預測是否相等(結果是布林值)
+    # tf.argmax()：得到每一筆資料相應的label值，並用 tf.equal() 檢查實際與預測是否相等(結果是布林值)
     correct_prediction = tf.equal(tf.argmax(y_pre,1),tf.argmax(v_ys,1))
-# tf.cast()：將布林值轉為0/1。並取平均數。
+    # tf.cast()：將布林值轉為0/1。並取平均數。
     accuracy = tf.reduce_mean(tf.cast(correct_prediction,tf.float32))
     result = sess.run(accuracy,feed_dict={xs:v_xs,ys:v_ys})
     return result
