@@ -181,9 +181,9 @@ $ tensorboard --logdir='logs/'
 ```
 ## MNIST 
 * MNIST
-MNIST資料集 = 55,000 筆訓練集 + 10,000 筆測試集 + 5,000 筆驗證數據集 
-每個圖像大小是 28 x 28 = 784 ，分別對應到數字 0 ~ 9 ，所以總共有 10 個 Laybel
-
+  + MNIST資料集 = 55,000 筆訓練集 + 10,000 筆測試集 + 5,000 筆驗證數據集 
+  + 每個圖像大小是 28 x 28 = 784 ，分別對應到數字 0 ~ 9 ，所以總共有 10 個 Laybel
+![](https://github.com/pinchenchen/Tensorflow/blob/master/MNIST_NUMBER.png)
 * import
 ```
 from tensorflow.examples.tutorials.mnist import input_data
@@ -197,14 +197,26 @@ mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 * Defined Neural Network Function
 ```
 def NeuralNetwork():
+# 圖像大小是 28 x 28 = 784，總共有 10 個 Laybel
+# [None,784]：將每一張圖都轉為 None(任意)*784 的維度
     xs = tf.placeholder(tf.float32,[None,784])
     ys = tf.placeholder(tf.float32,[None,10])
+    
+# activation_function=tf.nn.softmax：透過 Softmax 函數將分類器輸出的分數(Evidence)轉換為機率(Probability)
     prediction = add_layer(xs, 784, 10, n_layer=1,activation_function=tf.nn.softmax)
-    loss = tf.reduce_mean(-tf.reduce_sum(ys*tf.log(prediction),reduction_indices=[1]))
-    train_step = tf.train.GradientDescentOptimizer(0.5).minimize(loss)
-    sess = tf.Session()  
-    sess.run(tf.initialize_all_variables())
-    for i in range(2000):
+    
+# 計算loss
+    loss = tf.reduce_mean(-tf.reduce_sum(ys*tf.log(prediction),reduction_indices=[1]))
+# 使用梯度下降法優化Loss，學習速率是0.5
+    train_step = tf.train.GradientDescentOptimizer(0.5).minimize(loss)
+    
+# Run the Session
+    sess = tf.Session()
+# 初始化所有變量
+    sess.run(tf.initialize_all_variables())
+# 跑2000次，每200次print準確率
+# batch(100)：每次隨機抓取100筆去做訓練
+    for i in range(2000):
         batch_xs, batch_ys = mnist.train.next_batch(100)
         sess.run(train_step,feed_dict={xs:batch_xs,ys:batch_ys})
         if i%200==0:
@@ -213,9 +225,13 @@ def NeuralNetwork():
 * Defined Layer
 ```
 def add_layer(inputs,in_size,out_size,n_layer,activation_function=None):
-    layer_name = 'layer%s'%n_layer
-    with tf.name_scope(layer_name):
-        with tf.name_scope('Weights'):
+# 每一層都為他命名
+    layer_name = 'layer%s'%n_layer
+    
+# 每層的內容都有Weight, biases, Ws_plus_b
+    with tf.name_scope(layer_name):
+        with tf.name_scope('Weights'):      
+# 
             Weights = tf.Variable(tf.random_normal([in_size,out_size]),name='W')
             tf.histogram_summary(layer_name+'/weights', Weights)
         with tf.name_scope('biases'):
@@ -233,10 +249,13 @@ def add_layer(inputs,in_size,out_size,n_layer,activation_function=None):
 * Compute Accuracy
 ```
 def compute_accuracy(xs,ys,v_xs,v_ys,sess,prediction):
-    y_pre = sess.run(prediction,feed_dict={xs:v_xs})
-    correct_prediction = tf.equal(tf.argmax(y_pre,1),tf.argmax(v_ys,1))
-    accuracy = tf.reduce_mean(tf.cast(correct_prediction,tf.float32))
-    result = sess.run(accuracy,feed_dict={xs:v_xs,ys:v_ys})
+# feed_dict={xs:v_xs}搭配placeholder將資料匯入
+    y_pre = sess.run(prediction,feed_dict={xs:v_xs})
+# tf.argmax()：得到每一筆資料相應的label值，並用 tf.equal() 檢查實際與預測是否相等(結果是布林值)
+    correct_prediction = tf.equal(tf.argmax(y_pre,1),tf.argmax(v_ys,1))
+# tf.cast()：將布林值轉為0/1。並取平均數。
+    accuracy = tf.reduce_mean(tf.cast(correct_prediction,tf.float32))
+    result = sess.run(accuracy,feed_dict={xs:v_xs,ys:v_ys})
     return result
 ```
 * Run
