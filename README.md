@@ -180,4 +180,68 @@ writer = tf.summary.FileWriter("logs/", sess.graph)
 $ tensorboard --logdir='logs/'
 ```
 ## MNIST 
+* MNIST
+MNIST資料集 = 55,000 筆訓練集 + 10,000 筆測試集 + 5,000 筆驗證數據集 
+每個圖像大小是 28 x 28 = 784 ，分別對應到數字 0 ~ 9 ，所以總共有 10 個 Laybel
+
+* import
+```
+from tensorflow.examples.tutorials.mnist import input_data
+import tensorflow as tf
+import numpy as np
+```
+* Download MNIST
+```
+mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
+```
+* Defined Neural Network Function
+```
+def NeuralNetwork():
+    xs = tf.placeholder(tf.float32,[None,784])
+    ys = tf.placeholder(tf.float32,[None,10])
+    prediction = add_layer(xs, 784, 10, n_layer=1,activation_function=tf.nn.softmax)
+    loss = tf.reduce_mean(-tf.reduce_sum(ys*tf.log(prediction),reduction_indices=[1]))
+    train_step = tf.train.GradientDescentOptimizer(0.5).minimize(loss)
+    sess = tf.Session()  
+    sess.run(tf.initialize_all_variables())
+    for i in range(2000):
+        batch_xs, batch_ys = mnist.train.next_batch(100)
+        sess.run(train_step,feed_dict={xs:batch_xs,ys:batch_ys})
+        if i%200==0:
+            print(compute_accuracy(xs,ys,mnist.test.images, mnist.test.labels,sess,prediction))
+```
+* Defined Layer
+```
+def add_layer(inputs,in_size,out_size,n_layer,activation_function=None):
+    layer_name = 'layer%s'%n_layer
+    with tf.name_scope(layer_name):
+        with tf.name_scope('Weights'):
+            Weights = tf.Variable(tf.random_normal([in_size,out_size]),name='W')
+            tf.histogram_summary(layer_name+'/weights', Weights)
+        with tf.name_scope('biases'):
+            biases = tf.Variable(tf.zeros([1,out_size]) + 0.1,name='b')
+            tf.histogram_summary(layer_name+'/biases',biases)
+        with tf.name_scope('Ws_plus_b'):
+            Ws_plus_b = tf.matmul(inputs,Weights) + biases
+        if activation_function is None:
+            outputs = Ws_plus_b
+        else:
+            outputs = activation_function(Ws_plus_b)
+        tf.histogram_summary(layer_name+'/outputs',outputs)
+        return outputs
+```
+* Compute Accuracy
+```
+def compute_accuracy(xs,ys,v_xs,v_ys,sess,prediction):
+    y_pre = sess.run(prediction,feed_dict={xs:v_xs})
+    correct_prediction = tf.equal(tf.argmax(y_pre,1),tf.argmax(v_ys,1))
+    accuracy = tf.reduce_mean(tf.cast(correct_prediction,tf.float32))
+    result = sess.run(accuracy,feed_dict={xs:v_xs,ys:v_ys})
+    return result
+```
+* Run
+```
+NeuralNetwork()
+```
 ## 常用函式庫
+
