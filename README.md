@@ -197,6 +197,7 @@ $ tensorboard --logdir='logs/'
 `sudo yum install python-matplotlib`
 
 將 `anaconda2/pkgs/matplotlib-2.0.0-np111py27_0`裡面所有的檔案複製到 `/root/anaconda2/envs/tensorflow/lib/python2.7/site-pacages`
+
 2. 為解決: jupyter notebook內跑出的圖只有x,y資料集，沒有預測線
 
 但在直接用python是有預測線的
