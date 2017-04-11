@@ -1,13 +1,13 @@
 # 目錄
-## [Tensorflow](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#tensorflow)
-#### [0-安裝](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#0-安裝)
-#### [1-神經網路](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#1-神經網路)
-#### [2-tensorflow基本概念](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#2-tensorflow基本概念)
-#### [3-tensorboard-視覺化工具](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#3--tensorboard-視覺化工具)
-## [神經網路架構](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#神經網路架構)
-## [建立一個-y--x2--2x--1-的函數模型](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#建立一個-y--x2--2x--1-的函數模型)
-## [MNIST](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#mnist)
-## [常用函式庫](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#常用函式庫)
+* [Tensorflow](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#tensorflow)
+    + [0-安裝](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#0-安裝)
+    + [1-神經網路](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#1-神經網路)
+    + [2-tensorflow基本概念](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#2-tensorflow基本概念)
+    + [3-tensorboard-視覺化工具](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#3--tensorboard-視覺化工具)
+* [神經網路架構](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#神經網路架構)
+* [建立一個-y--x2--2x--1-的函數模型](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#建立一個-y--x2--2x--1-的函數模型)
+* [MNIST](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#mnist)
+* [常用函式庫](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#常用函式庫)
 
 ## Tensorflow
 * 官網：[Tensorflow](https://www.tensorflow.org/)
