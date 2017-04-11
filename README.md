@@ -6,7 +6,7 @@
     + [3-tensorboard-視覺化工具](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#3--tensorboard-視覺化工具)
 * [神經網路架構](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#神經網路架構)
 * [建立一個-y--x2--2x--1-的函數模型](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#建立一個-y--x2--2x--1-的函數模型)
-* [MNIST](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#mnist)
+* [MNIST -- Classification](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#mnist)
 * [常用函式庫](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#常用函式庫)
 
 ## Tensorflow
@@ -284,7 +284,7 @@ for i in range(1000):
         lines = ax.plot(x_data, prediction_value, 'r-', lw=5)
         plt.pause(0.1)
 ```
-## MNIST 
+## MNIST -- Classification
 * MNIST
   + MNIST資料集 = 55,000 筆訓練集 + 10,000 筆測試集 + 5,000 筆驗證數據集 
   + 每個圖像大小是 28 x 28 = 784 ，分別對應到數字 0 ~ 9 ，所以總共有 10 個 Laybel
