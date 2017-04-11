@@ -189,6 +189,13 @@ writer = tf.summary.FileWriter("logs/", sess.graph)
 $ tensorboard --logdir='logs/'
 ```
 ## 建立一個 y = x^2 + 2x + 1 的函數模型
+*problem
+1. 解決: no module named matplotlib
+`conda install matplotlib`
+`sudo yum install python-matplotlib`
+將 `anaconda2/pkgs/matplotlib-2.0.0-np111py27_0`裡面所有的檔案複製到 `/root/anaconda2/envs/tensorflow/lib/python2.7/site-pacages`
+2. 為解決: jupyter notebook內跑出的圖只有x,y資料集，沒有預測線
+但在直接用python是有預測線的
 ```
 from __future__ import print_function
 import tensorflow as tf
