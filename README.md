@@ -373,5 +373,9 @@ def compute_accuracy(xs,ys,v_xs,v_ys,sess,prediction):
 ```
 NeuralNetwork()
 ```
+`$ tensorboard --logdir=.Tensorflow/logs/`
+
+![](https://github.com/pinchenchen/Tensorflow/blob/master/MNIST_1.png)
+
 ## 常用函式庫
 
