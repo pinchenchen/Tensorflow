@@ -25,6 +25,15 @@ $ mkdir -p ~/.ipython/kernels
 $ mv ~/.local/share/jupyter/kernels/python2 ~/.ipython/kernels/tfkernels
 cd ~/.ipython/kernels/tfkernel/
 ```
+#### *problem
+下載packages的時候，與anaconda調用的路徑不一樣，需要把packages的檔案複製到anaconda路徑裡。
+anaconda路徑:
+'''
+import sys
+sys.path
+'''
+'/root/anaconda2/envs/tensorflow/lib/python2.7/site-pacages'
+
 ### 1 神經網路
 * 由輸入層+隱藏層+輸出層組成
 * 隱藏層輸出的output = input\*weight + baise
