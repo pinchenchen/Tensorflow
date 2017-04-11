@@ -292,6 +292,7 @@ for i in range(1000):
 * import
 ```
 from tensorflow.examples.tutorials.mnist import input_data
+from __future__ import print_function
 import tensorflow as tf
 import numpy as np
 ```
