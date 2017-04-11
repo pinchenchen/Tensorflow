@@ -188,6 +188,7 @@ writer = tf.summary.FileWriter("logs/", sess.graph)
 ```
 $ tensorboard --logdir='logs/'
 ```
+## 建立一個 y = x^2 + 2x + 1 的函數模型
 ## MNIST 
 * MNIST
   + MNIST資料集 = 55,000 筆訓練集 + 10,000 筆測試集 + 5,000 筆驗證數據集 
