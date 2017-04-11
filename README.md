@@ -25,7 +25,7 @@ $ mkdir -p ~/.ipython/kernels
 $ mv ~/.local/share/jupyter/kernels/python2 ~/.ipython/kernels/tfkernels
 cd ~/.ipython/kernels/tfkernel/
 ```
-#### *problem
+* problem
 下載packages的時候，與anaconda調用的路徑不一樣，需要把packages的檔案複製到anaconda路徑裡。
 anaconda路徑:
 ```
@@ -189,7 +189,7 @@ writer = tf.summary.FileWriter("logs/", sess.graph)
 $ tensorboard --logdir='logs/'
 ```
 ## 建立一個 y = x^2 + 2x + 1 的函數模型
-*problem
+* problem
 1. 解決: no module named matplotlib
 
 `conda install matplotlib`
@@ -201,6 +201,8 @@ $ tensorboard --logdir='logs/'
 2. 為解決: jupyter notebook內跑出的圖只有x,y資料集，沒有預測線
 
 但在直接用python是有預測線的
+
+* 完整程式碼
 ```
 from __future__ import print_function
 import tensorflow as tf
