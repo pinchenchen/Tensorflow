@@ -36,9 +36,19 @@ $ mkdir -p ~/.ipython/kernels
 $ mv ~/.local/share/jupyter/kernels/python2 ~/.ipython/kernels/tfkernels
 cd ~/.ipython/kernels/tfkernel/
 ```
+* download packages
+```
+$ pip install -U numpy
+$ pip install -U scipy
+$ pip install -U matplotlib
+$ pip install -U scikit-learn
+```
 * problem
 
-下載packages的時候，與anaconda調用的路徑不一樣，需要把packages的檔案複製到anaconda路徑裡。
+1. 在下載 matplotlib 的時候遇到 `error: command 'gcc' failed with exit status 1`:
+需要先安裝 `$ yum install gcc`，再執行`$ pip install -U matplotlib`
+
+2. 下載packages的時候，與anaconda調用的路徑不一樣，需要把packages的檔案複製到anaconda路徑裡。
 anaconda路徑:
 ```
 import sys
