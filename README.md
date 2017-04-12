@@ -549,9 +549,3 @@ NeuralNetwork()
 ![](https://github.com/pinchenchen/Tensorflow/blob/master/MNIST_1.png)
 
 [→ UPPPP](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#目錄)
-
-## 函式庫
-* [ctivate Function 激活函數](https://www.tensorflow.org/api_guides/python/nn)
-* [Optimizers 優化器](https://www.tensorflow.org/api_guides/python/train)
-
-[→ UPPPP](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#目錄)
