@@ -23,25 +23,25 @@
 ```
     $ conda create -n tensorflow
     $ source activate tensorflow
-    $ pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.0.1-cp27-none-linux_x86_64.whl
+   (tensorflow)$ pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.0.1-cp27-none-linux_x86_64.whl
 ```
 3. download packages
 ```
-$ pip install -U numpy
-$ pip install -U scipy
-$ pip install -U matplotlib
-$ pip install -U scikit-learn
+(tensorflow)$ pip install -U numpy
+(tensorflow)$ pip install -U scipy
+(tensorflow)$ pip install -U matplotlib
+(tensorflow)$ pip install -U scikit-learn
 ```
 4. use jupyter notebook
 ```
-$ conda install ipython`
-$ conda install jupyter`
-$ ipython kernelspec install-self --user
+(tensorflow)$ conda install ipython`
+(tensorflow)$ conda install jupyter`
+(tensorflow)$ ipython kernelspec install-self --user
 ```
 I get `Installed kernelspec python2 in /root/.local/shere/Jupyter/kernels/python2`
 ```
-$ mkdir -p ~/.ipython/kernels
-$ mv ~/.local/share/jupyter/kernels/python2 ~/.ipython/kernels/tfkernels
+(tensorflow)$ mkdir -p ~/.ipython/kernels
+(tensorflow)$ mv ~/.local/share/jupyter/kernels/python2 ~/.ipython/kernels/tfkernels
 cd ~/.ipython/kernels/tfkernel/
 ```
 * problem
