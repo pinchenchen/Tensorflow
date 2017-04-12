@@ -141,6 +141,12 @@ with tf.Session() as sess:
 
 ### 3  Tensorboard 視覺化工具
 ![](https://github.com/pinchenchen/Tensorflow/blob/master/video14.png)
+
+* 關於 Tensorboard 這檔事
+    * 一次只會出現一個圖(一個 $#%.internel 檔案)
+    * 好多個 $#%.internel 檔案在同個資料夾也只會跑出一個
+    * 檔案不一定要存在logs資料內，依照 SummaryWriter() 內的路徑
+    * 不能多開分頁因為大家共用一個 localhost 網址
 - 命名方式
 ```
 ...
