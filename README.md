@@ -14,9 +14,10 @@
 * 開源機器學習工具，神經網路的Python外部結構包
 * 繪製計算數據流程圖
 ### 0 安裝
-* Tensorflow1.0.1 CPU
-* Linux with Anaconda and jupyter notebook
-* ( pip uninstall tensorflow)(pip uninstall protobuf)
+* 版本：Tensorflow1.0.1 CPU
+* Packages：numpy, scipy, matplotlib, scikit-learn
+* 電腦配置：Linux with Anaconda and jupyter notebook
+* 移除舊版：( pip uninstall tensorflow)(pip uninstall protobuf)
 1. download Anaconda
 2. download Tensorflow
 ```
@@ -24,7 +25,14 @@
     $ source activate tensorflow
     $ pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.0.1-cp27-none-linux_x86_64.whl
 ```
-3. use jupyter notebook
+3. download packages
+```
+$ pip install -U numpy
+$ pip install -U scipy
+$ pip install -U matplotlib
+$ pip install -U scikit-learn
+```
+4. use jupyter notebook
 ```
 $ conda install ipython`
 $ conda install jupyter`
@@ -35,13 +43,6 @@ I get `Installed kernelspec python2 in /root/.local/shere/Jupyter/kernels/python
 $ mkdir -p ~/.ipython/kernels
 $ mv ~/.local/share/jupyter/kernels/python2 ~/.ipython/kernels/tfkernels
 cd ~/.ipython/kernels/tfkernel/
-```
-* download packages
-```
-$ pip install -U numpy
-$ pip install -U scipy
-$ pip install -U matplotlib
-$ pip install -U scikit-learn
 ```
 * problem
 
