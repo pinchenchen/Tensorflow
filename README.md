@@ -47,9 +47,11 @@ cd ~/.ipython/kernels/tfkernel/
 * problem
 
 1. 在下載 matplotlib 的時候遇到 `error: command 'gcc' failed with exit status 1`:
+
 需要先安裝 `$ yum install gcc`，再執行`$ pip install -U matplotlib`
 
 2. 下載packages的時候，與anaconda調用的路徑不一樣，需要把packages的檔案複製到anaconda路徑裡。
+
 anaconda路徑:
 ```
 import sys
@@ -61,10 +63,11 @@ sys.path
 * 由輸入層+隱藏層+輸出層組成
 * 隱藏層輸出的output = input\*weight + baise
 * 輸出層 Y' 經由 activation function 激活
+    + Activation function：[→ Tensorflow 提供的函數](https://www.tensorflow.org/api_guides/python/nn)
 ![](https://github.com/pinchenchen/Tensorflow/blob/master/NN.png)
 * 計算 Y' 與真實數據 Y 的差距(損失函數)
 * 訓練目標：訓練 Weight 與 Baise 使得 Y' 與 Y 的差距最小(↓不同方法的訓練過程)
-* 優化方法：[https://www.tensorflow.org/api_guides/python/train](https://www.tensorflow.org/api_guides/python/train)
+    + 優化方法：[→ Tensorflow 提供的方法](https://www.tensorflow.org/api_guides/python/train)
 ![](https://github.com/pinchenchen/Tensorflow/blob/master/speedup3.png)
 
 ### 2 Tensorflow基本概念
