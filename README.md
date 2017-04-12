@@ -9,7 +9,7 @@
     + [3-tensorboard-視覺化工具](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#3--tensorboard-視覺化工具)
 * [神經網路架構](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#神經網路架構)
 * [建立一個-y--x2--2x--1-的函數模型](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#建立一個-y--x2--2x--1-的函數模型)
-* [Dropout]()
+* [Dropout](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#dropout)
 * [MNIST -- Classification](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#mnist----classification)
 * [常用函式庫](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#常用函式庫)
 
