@@ -225,13 +225,14 @@ $ tensorboard --logdir='logs/'
 ```
 ## 建立一個 y = x^2 + 2x + 1 的函數模型
 * problem
-1. 解決: no module named matplotlib
+1. 已解決: 提示訊息 ` no module named matplotlib ` 
 
-`conda install matplotlib`
+```
+$ conda install matplotlib
+$ sudo yum install python-matplotlib
+```
 
-`sudo yum install python-matplotlib`
-
-將 `anaconda2/pkgs/matplotlib-2.0.0-np111py27_0`裡面所有的檔案複製到 `/root/anaconda2/envs/tensorflow/lib/python2.7/site-pacages`
+將 `anaconda2/pkgs/matplotlib-2.0.0-np111py27_0` 裡面所有的檔案複製到 `/root/anaconda2/envs/tensorflow/lib/python2.7/site-pacages`
 
 2. 未解決: jupyter notebook內跑出的圖只有x,y資料集，沒有預測線
 
@@ -309,15 +310,17 @@ for i in range(1000):
 ## Dropout
 * problem
 1. 已解決
-
-`DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. This module will be removed in 0.20.
-DeprecationWarning)`
+提示訊息
+```DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. This module will be removed in 0.20.
+DeprecationWarning)
+```
 
 將 import 的sklearn.cross_validation 改成 sklearn.model_selection 就可以了
 
 2. 已解決
-
-`InvalidArgumentError (see above for traceback): You must feed a value for placeholder tensor `Placeholder` with dtype float`
+提示訊息
+```InvalidArgumentError (see above for traceback): You must feed a value for placeholder tensor `Placeholder` with dtype float
+```
 
 這好像是jupyter的一個bug，把jupyter重開或者是把之前的ipynb刪除就可以了
 
