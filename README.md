@@ -62,13 +62,17 @@ sys.path
 `/root/anaconda2/envs/tensorflow/lib/python2.7/site-pacages`
 
 ### 1 神經網路
+* 這個翻譯網站解釋的很詳細，也有數學證明→[「 Neural Networks and Deep Learning 」](https://hit-scir.gitbooks.io/neural-networks-and-deep-learning-zh_cn/content/)
 * 由輸入層+隱藏層+輸出層組成
 * 隱藏層輸出的output = input\*weight + baise
 * 輸出層 Y' 經由 activation function 激活
     * 激活函數：[→ Tensorflow 提供的方法](https://www.tensorflow.org/api_guides/python/nn)
     
 ![](https://github.com/pinchenchen/Tensorflow/blob/master/NN.png)
-* 計算 Y' 與真實數據 Y 的差距(損失函數)
+* 計算 Y' 與真實數據 Y 的差距(損失函數/代價函數)
+    * Guadratic Cost Function 均方誤差
+    * Cross-Entropy 交叉熵
+    
 * 訓練目標：訓練 Weight 與 Baise 使得 Y' 與 Y 的差距最小(↓不同方法的訓練過程)
     * 優化方法：[→ Tensorflow 提供的方法](https://www.tensorflow.org/api_guides/python/train)
     
@@ -314,6 +318,8 @@ for i in range(1000):
         plt.pause(0.1)
 ```
 ## Dropout
+* 
+
 * problem
 1. 已解決
 
@@ -405,6 +411,9 @@ for i in range(500):
         train_writer.add_summary(train_result, i)
         test_writer.add_summary(test_result, i)
 ```
+`$ tensorboard --logdir='~/Tensorflow/logs/`
+![]()
+
 ## MNIST -- Classification
 * MNIST
   + MNIST資料集 = 55,000 筆訓練集 + 10,000 筆測試集 + 5,000 筆驗證數據集 
@@ -496,7 +505,7 @@ NeuralNetwork()
 ```
 ![](https://github.com/pinchenchen/Tensorflow/blob/master/MNIST_1_result.png)
 
-`$ tensorboard --logdir=.Tensorflow/logs/`
+`$ tensorboard --logdir='~/Tensorflow/logs/'`
 
 ![](https://github.com/pinchenchen/Tensorflow/blob/master/MNIST_1.png)
 
