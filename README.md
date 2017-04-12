@@ -1,3 +1,4 @@
+#### 我從這邊學→[莫凡Python](https://morvanzhou.github.io/)
 # 目錄
 * [Tensorflow](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#tensorflow)
     + [0-安裝](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#0-安裝)
@@ -79,7 +80,7 @@ sys.path
 ![](https://github.com/pinchenchen/Tensorflow/blob/master/speedup3.png)
 
 * Overfitting 過擬合問題：
-    * Dropout 解決：隨機讓某些隱含層的節點不作用。這裡有詳細的解釋 → [Deep learning：四十一(Dropout简单理解)](http://www.cnblogs.com/tornadomeet/p/3258122.html)
+    * 用 Dropout 解決：隨機讓某些隱含層的節點不作用。這裡有詳細的解釋 → [Deep learning：四十一(Dropout简单理解)](http://www.cnblogs.com/tornadomeet/p/3258122.html)
 
 ### 2 Tensorflow基本概念
 * 用`graph`描述計算的過程
@@ -318,8 +319,11 @@ for i in range(1000):
         plt.pause(0.1)
 ```
 ## Dropout
-* 
-
+* 用 Dropout 解決 Overfitting 過擬合問題：隨機讓某些隱含層的節點不作用。
+    * 在定義layer層的時候 `Wx_plus_b = tf.nn.dropout(Wx_plus_b, keep_prob)`
+    * keep_prob 是保留的機率，當 keep_prob = 1 時，為全部保留。
+    * 之後的 `keep_prob = tf.placeholder(tf.float32)` 時作為一個placeholder，在run的時候傳入
+    
 * problem
 1. 已解決
 
@@ -353,17 +357,19 @@ from sklearn.preprocessing import LabelBinarizer
 digits = load_digits()
 X = digits.data
 y = digits.target
+# 此時y是[0,1,2,3,4,5,6,7,8,9]的答案，改成 0為[1,0,0,0,0,0,0,0,0,0]
 y = LabelBinarizer().fit_transform(y)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.3)
 
 
 def add_layer(inputs, in_size, out_size, layer_name, activation_function=None, ):
-    # add one more layer and return the output of this layer
     Weights = tf.Variable(tf.random_normal([in_size, out_size]))
     biases = tf.Variable(tf.zeros([1, out_size]) + 0.1, )
     Wx_plus_b = tf.matmul(inputs, Weights) + biases
+    
     # here to dropout
     Wx_plus_b = tf.nn.dropout(Wx_plus_b, keep_prob)
+    
     if activation_function is None:
         outputs = Wx_plus_b
     else:
@@ -382,6 +388,7 @@ l1 = add_layer(xs, 64, 50, 'l1', activation_function=tf.nn.tanh)
 prediction = add_layer(l1, 50, 10, 'l2', activation_function=tf.nn.softmax)
 
 # the loss between prediction and real data
+# 這邊使用cross_entropy作為損失函數
 cross_entropy = tf.reduce_mean(-tf.reduce_sum(ys * tf.log(prediction),
                                               reduction_indices=[1]))  # loss
 tf.summary.scalar('loss', cross_entropy)
@@ -412,7 +419,7 @@ for i in range(500):
         test_writer.add_summary(test_result, i)
 ```
 `$ tensorboard --logdir='~/Tensorflow/logs/`
-![]()
+![Dropout_loss](https://github.com/pinchenchen/Tensorflow/blob/master/Dropout_loss.png)
 
 ## MNIST -- Classification
 * MNIST
