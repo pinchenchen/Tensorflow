@@ -73,7 +73,7 @@ sys.path
 * 輸出層 Y' 經由 activation function 激活
     * 激活函數：[→ Tensorflow 提供的方法](https://www.tensorflow.org/api_guides/python/nn)
     
-![](https://github.com/pinchenchen/Tensorflow/blob/master/NN.png)
+![](https://github.com/pinchenchen/Tensorflow/blob/master/README_Files/NN_stru.png)
 * 計算 Y' 與真實數據 Y 的差距(損失函數/代價函數)
     * Guadratic Cost Function 均方誤差
     * Cross-Entropy 交叉熵
@@ -81,7 +81,7 @@ sys.path
 * 訓練目標：訓練 Weight 與 Baise 使得 Y' 與 Y 的差距最小(↓不同方法的訓練過程)
     * 優化方法：[→ Tensorflow 提供的方法](https://www.tensorflow.org/api_guides/python/train)
     
-![](https://github.com/pinchenchen/Tensorflow/blob/master/speedup3.png)
+![](https://github.com/pinchenchen/Tensorflow/blob/master/README_Files/Speedup.png)
 
 #### 1.1 改善神經網路
 * Overfitting 過擬合問題：
@@ -140,7 +140,7 @@ with tf.Session() as sess:
 [→ UPPPP](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#目錄)
 
 ### 3  Tensorboard 視覺化工具
-![](https://github.com/pinchenchen/Tensorflow/blob/master/video14.png)
+![](https://github.com/pinchenchen/Tensorflow/blob/master/README_Files/video14.png)
 
 * 關於 Tensorboard 這檔事
     * 一次只會出現一個圖(一個 $#%.internel 檔案
@@ -448,7 +448,7 @@ for i in range(500):
 
 Dropout_loss
 
-![Dropout_loss](https://github.com/pinchenchen/Tensorflow/blob/master/Dropout_loss.png)
+![Dropout_loss](https://github.com/pinchenchen/Tensorflow/blob/master/README_Files/Dropout_loss.png)
 
 
 [→ UPPPP](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#目錄)
@@ -457,7 +457,7 @@ Dropout_loss
 * MNIST
   + MNIST資料集 = 55,000 筆訓練集 + 10,000 筆測試集 + 5,000 筆驗證數據集 
   + 每個圖像大小是 28 x 28 = 784 ，分別對應到數字 0 ~ 9 ，所以總共有 10 個 Laybel
-![](https://github.com/pinchenchen/Tensorflow/blob/master/MNIST_NUMBER.png)
+![](https://github.com/pinchenchen/Tensorflow/blob/master/README_Files/MNIST_NUMBER.png)
 * import
 ```
 from tensorflow.examples.tutorials.mnist import input_data
@@ -542,10 +542,10 @@ def compute_accuracy(xs,ys,v_xs,v_ys,sess,prediction):
 ```
 NeuralNetwork()
 ```
-![](https://github.com/pinchenchen/Tensorflow/blob/master/MNIST_1_result.png)
+![](https://github.com/pinchenchen/Tensorflow/blob/master/README_Files/MNIST_1_result.png)
 
 `$ tensorboard --logdir='~/Tensorflow/logs/'`
 
-![](https://github.com/pinchenchen/Tensorflow/blob/master/MNIST_1.png)
+![](https://github.com/pinchenchen/Tensorflow/blob/master/README_Files/MNIST_1.png)
 
 [→ UPPPP](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#目錄)
