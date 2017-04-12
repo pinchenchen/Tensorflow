@@ -63,7 +63,7 @@ sys.path
 * 由輸入層+隱藏層+輸出層組成
 * 隱藏層輸出的output = input\*weight + baise
 * 輸出層 Y' 經由 activation function 激活
-    * activation function：[→ Tensorflow 提供的方法](https://www.tensorflow.org/api_guides/python/nn)
+    * 激活函數：[→ Tensorflow 提供的方法](https://www.tensorflow.org/api_guides/python/nn)
     
 ![](https://github.com/pinchenchen/Tensorflow/blob/master/NN.png)
 * 計算 Y' 與真實數據 Y 的差距(損失函數)
