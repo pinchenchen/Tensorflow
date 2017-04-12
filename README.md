@@ -83,9 +83,12 @@ sys.path
     
 ![](https://github.com/pinchenchen/Tensorflow/blob/master/speedup3.png)
 
+#### 1.1 改善神經網路
 * Overfitting 過擬合問題：
     * 用 Dropout 解決：隨機讓某些隱含層的節點不作用。這裡有詳細的解釋 → [Deep learning：四十一(Dropout简单理解)](http://www.cnblogs.com/tornadomeet/p/3258122.html)
 
+* Softmax：
+    * 將輸出結果轉化為機率概念。[Softmax](http://neuralnetworksanddeeplearning.com/chap3.html#softmax)
 ### 2 Tensorflow基本概念
 * 用`graph`描述計算的過程
 * 在 `session` 中執行
