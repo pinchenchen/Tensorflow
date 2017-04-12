@@ -340,9 +340,9 @@ for i in range(1000):
 
 ## Dropout
 * 用 Dropout 解決 Overfitting 過擬合問題：隨機讓某些隱含層的節點不作用。
-    * 在定義layer層的時候 `Wx_plus_b = tf.nn.dropout(Wx_plus_b, keep_prob)`
-    * keep_prob 是保留的機率，當 keep_prob = 1 時，為全部保留。
-    * 之後的 `keep_prob = tf.placeholder(tf.float32)` 時作為一個placeholder，在run的時候傳入
+    * 在定義layer層的時候 `Wx_plus_b = tf.nn.dropout(Wx_plus_b, keep_prob)`
+    * keep_prob 是保留的機率，當 keep_prob = 1 時，為全部保留。
+    * 之後的 `keep_prob = tf.placeholder(tf.float32)` 時作為一個placeholder，在run的時候傳入
     
 * problem
 1. 已解決
