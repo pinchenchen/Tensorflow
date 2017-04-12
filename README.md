@@ -317,7 +317,8 @@ for i in range(1000):
 * problem
 1. 已解決
 提示訊息
-```DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. This module will be removed in 0.20.
+```
+DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. This module will be removed in 0.20.
 DeprecationWarning)
 ```
 
@@ -325,7 +326,8 @@ DeprecationWarning)
 
 2. 已解決
 提示訊息
-```InvalidArgumentError (see above for traceback): You must feed a value for placeholder tensor `Placeholder` with dtype float
+```
+InvalidArgumentError (see above for traceback): You must feed a value for placeholder tensor `Placeholder` with dtype float
 ```
 
 這好像是jupyter的一個bug，把jupyter重開或者是把之前的ipynb刪除就可以了
