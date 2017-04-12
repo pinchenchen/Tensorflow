@@ -6,6 +6,7 @@
     + [3-tensorboard-視覺化工具](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#3--tensorboard-視覺化工具)
 * [神經網路架構](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#神經網路架構)
 * [建立一個-y--x2--2x--1-的函數模型](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#建立一個-y--x2--2x--1-的函數模型)
+* [Dropout]()
 * [MNIST -- Classification](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#mnist----classification)
 * [常用函式庫](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#常用函式庫)
 
@@ -13,6 +14,7 @@
 * 官網：[Tensorflow](https://www.tensorflow.org/)
 * 開源機器學習工具，神經網路的Python外部結構包
 * 繪製計算數據流程圖
+
 ### 0 安裝
 * 版本：Tensorflow1.0.1 CPU
 * Packages：numpy, scipy, matplotlib, scikit-learn
@@ -72,6 +74,9 @@ sys.path
     
 ![](https://github.com/pinchenchen/Tensorflow/blob/master/speedup3.png)
 
+* Overfitting 過擬合問題：
+    * Dropout 解決：隨機讓某些隱含層的節點不作用。這裡有詳細的解釋 → [Deep learning：四十一(Dropout简单理解)](http://www.cnblogs.com/tornadomeet/p/3258122.html)
+
 ### 2 Tensorflow基本概念
 * 用`graph`描述計算的過程
 * 在 `session` 中執行
@@ -80,6 +85,7 @@ sys.path
 * `feed` & `fetch`可以在任意步驟中賦值或添加數據
 
 #### 2.1 Tensorflow基礎架構
+#### 由 Computation Graph + Session
 * Computation Graph
 ```
 # placeholder(類型, 形狀, 名子=None), 為 feed 建立佔位符, 與 feed_dict={} 一起使用
@@ -227,7 +233,7 @@ $ tensorboard --logdir='logs/'
 
 將 `anaconda2/pkgs/matplotlib-2.0.0-np111py27_0`裡面所有的檔案複製到 `/root/anaconda2/envs/tensorflow/lib/python2.7/site-pacages`
 
-2. 為解決: jupyter notebook內跑出的圖只有x,y資料集，沒有預測線
+2. 未解決: jupyter notebook內跑出的圖只有x,y資料集，沒有預測線
 
 但在直接用python是有預測線的
 
@@ -300,6 +306,8 @@ for i in range(1000):
         lines = ax.plot(x_data, prediction_value, 'r-', lw=5)
         plt.pause(0.1)
 ```
+## Dropout
+
 ## MNIST -- Classification
 * MNIST
   + MNIST資料集 = 55,000 筆訓練集 + 10,000 筆測試集 + 5,000 筆驗證數據集 
