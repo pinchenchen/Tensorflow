@@ -1,4 +1,4 @@
-<h6 style="text-align:right"><a href="https://github.com/pinchenchen/Tensorflow/blob/master/README.md#目錄">UP</a></h6>
+[→ UPPPP](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#目錄)
 
 #### 我從這邊學→[莫凡Python](https://morvanzhou.github.io/)
 # 目錄
@@ -64,6 +64,8 @@ sys.path
 ```
 `/root/anaconda2/envs/tensorflow/lib/python2.7/site-pacages`
 
+[→ UPPPP](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#目錄)
+
 ### 1 神經網路
 * 這個翻譯網站解釋的很詳細，也有數學證明→[「 Neural Networks and Deep Learning 」](https://hit-scir.gitbooks.io/neural-networks-and-deep-learning-zh_cn/content/)
 * 由輸入層+隱藏層+輸出層組成
@@ -90,6 +92,8 @@ sys.path
 * `tensor`表示數據(組)
 * `Variable`變量維護執行過程中的狀態
 * `feed` & `fetch`可以在任意步驟中賦值或添加數據
+
+[→ UPPPP](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#目錄)
 
 #### 2.1 Tensorflow基礎架構
 #### 由 Computation Graph + Session
@@ -130,7 +134,7 @@ with tf.Session() as sess:
         print i,sess.run(w),sess.run(b)                 # 輸出結果
 ```
 
-
+[→ UPPPP](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#目錄)
 
 ### 3  Tensorboard 視覺化工具
 ![](https://github.com/pinchenchen/Tensorflow/blob/master/video14.png)
@@ -164,6 +168,8 @@ for i in range(500):
 $ tensorboard --logdir=./logs/
 ```
 get http://localhost:6006
+
+[→ UPPPP](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#目錄)
 
 ## 神經網路架構
 * 建構神經網路
@@ -239,6 +245,9 @@ writer = tf.summary.FileWriter("logs/", sess.graph)
 ```
 $ tensorboard --logdir='logs/'
 ```
+
+[→ UPPPP](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#目錄)
+
 ## 建立一個 y = x^2 + 2x + 1 的函數模型
 * problem
 1. 已解決: 提示訊息 ` no module named matplotlib ` 
@@ -323,6 +332,9 @@ for i in range(1000):
         lines = ax.plot(x_data, prediction_value, 'r-', lw=5)
         plt.pause(0.1)
 ```
+
+[→ UPPPP](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#目錄)
+
 ## Dropout
 * 用 Dropout 解決 Overfitting 過擬合問題：隨機讓某些隱含層的節點不作用。
     * 在定義layer層的時候 `Wx_plus_b = tf.nn.dropout(Wx_plus_b, keep_prob)`
@@ -429,6 +441,9 @@ Dropout_loss
 
 ![Dropout_loss](https://github.com/pinchenchen/Tensorflow/blob/master/Dropout_loss.png)
 
+
+[→ UPPPP](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#目錄)
+
 ## MNIST -- Classification
 * MNIST
   + MNIST資料集 = 55,000 筆訓練集 + 10,000 筆測試集 + 5,000 筆驗證數據集 
@@ -524,6 +539,10 @@ NeuralNetwork()
 
 ![](https://github.com/pinchenchen/Tensorflow/blob/master/MNIST_1.png)
 
+[→ UPPPP](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#目錄)
+
 ## 函式庫
 * [ctivate Function 激活函數](https://www.tensorflow.org/api_guides/python/nn)
 * [Optimizers 優化器](https://www.tensorflow.org/api_guides/python/train)
+
+[→ UPPPP](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#目錄)
