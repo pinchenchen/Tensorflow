@@ -157,12 +157,8 @@ get http://localhost:6006
 
 ## 神經網路架構
 * 建構神經網路
-```
-from __future__ import print_function
-import tensorflow as tf
-import numpy as np
-```
-* placeholder 提供佔位符給輸入資料
+
+1. placeholder 提供佔位符給輸入資料
     * placeholder(符點數, [n*1]維度, 名子)                    
 ```
 with tf.name_scope('inputs'):                                     # inputs框框命名為'inputs'
@@ -170,7 +166,7 @@ with tf.name_scope('inputs'):                                  
     ys = tf.placeholder(tf.float32, [None, 1], name='y_input')    # ys input節點命名為'y_input'
 ```
 
-* 建構隱藏神經層 layer 與創建變量 Variable 
+2. 建構隱藏神經層 layer 與創建變量 Variable 
     * add_layer( input, 輸入維度, 輸出維度, 激活函數 )
 ```
 def add_layer(inputs, in_size, out_size, activation_function=None):
@@ -193,24 +189,24 @@ def add_layer(inputs, in_size, out_size, activation_function=None):
      return outputs
 ```
 
-* 建立隱藏層 (input=xs, 輸入維度=1 → 輸出維度=10, 激活函數=relu function)
+3. 建立隱藏層 (input=xs, 輸入維度=1 → 輸出維度=10, 激活函數=relu function)
 ```
 l1 = add_layer(xs, 1, 10, activation_function=tf.nn.relu)
 ```
-* 定義輸出層 (input=l1 隱藏層的輸出, 輸入維度=10 → 輸出維度=1, 激活函數=None)
+4. 定義輸出層 (input=l1 隱藏層的輸出, 輸入維度=10 → 輸出維度=1, 激活函數=None)
 ```
 prediction = add_layer(l1, 10, 1, activation_function=None)
 ```
-* 計算 loss 損失函數 (對 ys & prediction 之間的差 取平方和，再將第二個維度相加 取平均值)
+5. 計算 loss 損失函數 (對 ys & prediction 之間的差 取平方和，再將第二個維度相加 取平均值)
 ```
 loss = tf.reduce_mean( tf.reduce_sum(tf.square(ys-prediction),reduction_indices=[1]) )
 ```
-* 使用 GradientDescent 梯度下降法最小化loss
+6. 使用 GradientDescent 梯度下降法最小化loss
 ```
 with tf.name_scope('train'):
     train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
 ```
-* 定義 session 
+7. 定義 session 
 ```
 with tf.Session() as sess:
     # Summary 寫入文件中儲存
@@ -225,11 +221,11 @@ with tf.Session() as sess:
         if i%100==0:
             print(sess.run(loss,feed_dict={xs:x_data,ys:y_data}))
 ```
-* 更新 Summary
+8. 更新 Summary
 ```
 writer = tf.summary.FileWriter("logs/", sess.graph)
 ```
-* 查看Tensorboard
+9. 查看Tensorboard
 ```
 $ tensorboard --logdir='logs/'
 ```
