@@ -1,3 +1,5 @@
+<h6 style="text-align:right"><a href="https://github.com/pinchenchen/Tensorflow/blob/master/README.md#目錄">UP</a></h6>
+
 #### 我從這邊學→[莫凡Python](https://morvanzhou.github.io/)
 # 目錄
 * [Tensorflow](https://github.com/pinchenchen/Tensorflow/blob/master/README.md#tensorflow)
@@ -127,6 +129,9 @@ with tf.Session() as sess:
     if i%50 == 0:                                       # 每50次輸出一次結果
         print i,sess.run(w),sess.run(b)                 # 輸出結果
 ```
+
+
+
 ### 3  Tensorboard 視覺化工具
 ![](https://github.com/pinchenchen/Tensorflow/blob/master/video14.png)
 - 命名方式
@@ -418,7 +423,10 @@ for i in range(500):
         train_writer.add_summary(train_result, i)
         test_writer.add_summary(test_result, i)
 ```
-`$ tensorboard --logdir='~/Tensorflow/logs/`
+` $ tensorboard --logdir='~/Tensorflow/logs/ `
+
+Dropout_loss
+
 ![Dropout_loss](https://github.com/pinchenchen/Tensorflow/blob/master/Dropout_loss.png)
 
 ## MNIST -- Classification
